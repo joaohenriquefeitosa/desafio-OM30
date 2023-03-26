@@ -1,0 +1,334 @@
+_type: export
+__export_format: 4
+__export_date: 2023-03-26T23:02:15.761Z
+__export_source: insomnia.desktop.app:v2022.1.0
+resources:
+  - _id: req_022dc54c8bfe4322ba6ceeac727d498f
+    parentId: fld_29e4b257ba8b43c595353d60f232fcd5
+    modified: 1679812369571
+    created: 1679812230703
+    url: http://localhost:8082/api/zipcode?zipcode=83065060
+    name: Get Address From Zipcode
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_9f3ac1c4e4f149e287d005dc9e16b288
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_d8547b9d36bc4fa59564c9426082ccfe
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication: {}
+    metaSortKey: -1679812230703
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_29e4b257ba8b43c595353d60f232fcd5
+    parentId: wrk_7583ea8f55a946498e00088e9344f270
+    modified: 1679812214117
+    created: 1679812214117
+    name: Address
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1679812214117
+    _type: request_group
+  - _id: wrk_7583ea8f55a946498e00088e9344f270
+    parentId: null
+    modified: 1679810341179
+    created: 1679810341179
+    name: om30
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_7b73972f4d704023882ecf68a02a73be
+    parentId: fld_4b76792a70264b60a37662f3abf996b4
+    modified: 1679870496422
+    created: 1679810392024
+    url: http://localhost:8082/api/patient?search=Lang
+    name: Index
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1679810392024
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_4b76792a70264b60a37662f3abf996b4
+    parentId: wrk_7583ea8f55a946498e00088e9344f270
+    modified: 1679810360470
+    created: 1679810360470
+    name: Patients
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1679810360470
+    _type: request_group
+  - _id: req_d1b23352411b4cf096d9f8a4d40c1206
+    parentId: fld_4b76792a70264b60a37662f3abf996b4
+    modified: 1679862752601
+    created: 1679811404529
+    url: http://localhost:8082/api/patient/98c85983-06da-44e2-8ba3-5c7257cb9d2c
+    name: Show
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1679677587230
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2d9786ca2da244cfbe2902ada44b1c46
+    parentId: fld_4b76792a70264b60a37662f3abf996b4
+    modified: 1679811540428
+    created: 1679811534086
+    url: http://localhost:8082/api/patient/98c727c9-4e75-444e-9429-158541d1dbce
+    name: Delete
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1679611184833
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_02d5510c3e674dca81203e707f0ee669
+    parentId: fld_4b76792a70264b60a37662f3abf996b4
+    modified: 1679871225412
+    created: 1679810475976
+    url: http://localhost:8082/api/patient
+    name: Store
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Ringo Starr",
+        	"birth_date": "07-07-1940",
+        	"cpf": "38610584054",
+        	"cns": "238115035490008",
+        	"mother_name": "Elsie Starkey",
+        	"zipcode": "83065-060",
+        	"address": "Test Street",
+        	"number": "456a",
+        	"complement": "2nd house",
+        	"neighborhood": "village",
+        	"city": "Curitiba",
+        	"state": "PR"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_df623b74436340598602063d2b32499b
+      - id: pair_2c09b254bb4b483fa220b2d65c8f80c3
+        name: Accept
+        value: application/json
+        description: ""
+    authentication: {}
+    metaSortKey: -1679544782436
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_77e6357d5a474a129fdf50dff9982133
+    parentId: fld_4b76792a70264b60a37662f3abf996b4
+    modified: 1679862600595
+    created: 1679862416464
+    url: http://localhost:8082/api/patient
+    name: Store - Picture
+    description: ""
+    method: POST
+    body:
+      mimeType: multipart/form-data
+      params:
+        - name: name
+          value: Ringo Starr
+          id: pair_ffacc0717fa84afe9f93a8f175123c77
+        - id: pair_71d4c9cc304847c9b7b1bec01b158d53
+          name: birth_date
+          value: 07-07-1940
+          description: ""
+        - id: pair_cf2187f6651941ae9549bba4e31fa0bc
+          name: cpf
+          value: "38610584054"
+          description: ""
+        - id: pair_d7fef7d293ed41fc9de67450c2211778
+          name: cns
+          value: "229661101960006"
+          description: ""
+        - id: pair_a86def9e010b4d89b3413e23c9f88672
+          name: mother_name
+          value: Elsie Starkey
+          description: ""
+        - id: pair_231e13b0bd7c460587c00a700c176b29
+          name: zipcode
+          value: 83065-060
+          description: ""
+        - id: pair_4edf416c66a545c183701b88ce7991c8
+          name: address
+          value: Test Street
+          description: ""
+        - id: pair_e48dda4b8eea438a8b4c82993332d1ec
+          name: number
+          value: 456a
+          description: ""
+        - id: pair_413f0c07b1d6403197490995c2c079cb
+          name: complement
+          value: 2nd house
+          description: ""
+        - id: pair_eec4cad161e54186bcdeb3a12776f028
+          name: neighborhood
+          value: village
+          description: ""
+        - id: pair_82461302f0b34a0291298399ef690083
+          name: city
+          value: Curitiba
+          description: ""
+        - id: pair_d2b3279151be470db35568a898264324
+          name: state
+          value: PR
+          description: ""
+        - id: pair_3cc49c6ad61045cc8763c20acc9fdd9d
+          name: picture
+          value: ""
+          description: ""
+          type: file
+          multiline: null
+          fileName: /home/joaohenrique/Imagens/Captura de tela de 2023-03-25 14-49-19.png
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+        id: pair_df623b74436340598602063d2b32499b
+      - id: pair_2c09b254bb4b483fa220b2d65c8f80c3
+        name: Accept
+        value: application/json
+        description: ""
+    authentication: {}
+    metaSortKey: -1679478380039
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d9a2487707ee47b79b2754dd5445c3d3
+    parentId: fld_4b76792a70264b60a37662f3abf996b4
+    modified: 1679858144113
+    created: 1679811423140
+    url: http://localhost:8082/api/patient/98c83dc1-74dc-4523-8dd6-1b8199d217bf
+    name: Update
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Ringo Starr - The best beatle",
+        	"address": "abbey road, 21"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_df623b74436340598602063d2b32499b
+    authentication: {}
+    metaSortKey: -1679411977642
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_646bd42f86d4d327a9dda0127c1d6b640603e93b
+    parentId: wrk_7583ea8f55a946498e00088e9344f270
+    modified: 1679810341190
+    created: 1679810341190
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1679810341190
+    _type: environment
+  - _id: jar_646bd42f86d4d327a9dda0127c1d6b640603e93b
+    parentId: wrk_7583ea8f55a946498e00088e9344f270
+    modified: 1679814033993
+    created: 1679810341193
+    name: Default Jar
+    cookies:
+      - key: XSRF-TOKEN
+        value: eyJpdiI6IjNOdmZ0dVVXU3YxY2VSbGlZTlBJYmc9PSIsInZhbHVlIjoiME9YaXljTXVFTW9UdVVaV0h4eHVFNzVXWEFkQXZWd3A1MmJZU282MnJyVEo0dzlxWmJ3RzhncDI4RE0rVTZ4VVRIbldLb1g1M0RRV3dqeDVqODlOaG1Ia1hFKzNtMTFXWGExamVzK2s0dC9mNDdIVzRPMDFzb3ZIYTVOaVNtRXYiLCJtYWMiOiIxOTkzYTkxZThlZWY4Y2IyN2E4MmRkM2EwNjg5OTdhMmU1NWNmMTQ3MzNiODg3MmUyOWU2YjE0MWFiOGQyMjU3IiwidGFnIjoiIn0%3D
+        expires: 2023-03-26T09:00:33.000Z
+        maxAge: 7200
+        domain: localhost
+        path: /
+        extensions:
+          - samesite=lax
+        hostOnly: true
+        creation: 2023-03-26T06:31:53.895Z
+        lastAccessed: 2023-03-26T07:00:33.991Z
+        id: "6641850083635197"
+      - key: laravel_session
+        value: eyJpdiI6ImJoUUxaVkNKREdQMUVnOGxXVWxRNWc9PSIsInZhbHVlIjoiU01LUmNoR2ViQ2Z4WGhuS1J1VWxjMG8wRWJ2RVVCeUx6eG9od3dFWm5TbmdXSHp4R3hSQzNjUmUzS1Z6anl3SFZscjBaaXZBeTVXNU5XbjdpWStnU0d4cm1ONkRGWHNrRnFpcGpkaVVPUW5xZUdkM0lYcEdwVU94amdPbll4NFYiLCJtYWMiOiIxNzMyMmI4ODhjNWI1NWZkNDJhM2NjYjUzOTZlM2Q3YWMxZDRhODBkY2UwMGVhMzk2ODZmYTNiYjJmZTc5NzY5IiwidGFnIjoiIn0%3D
+        expires: 2023-03-26T09:00:33.000Z
+        maxAge: 7200
+        domain: localhost
+        path: /
+        httpOnly: true
+        extensions:
+          - samesite=lax
+        hostOnly: true
+        creation: 2023-03-26T06:31:53.895Z
+        lastAccessed: 2023-03-26T07:00:33.992Z
+        id: "17714034460436556"
+    _type: cookie_jar
+  - _id: spc_790b3d57d592491b903358e886e01c3b
+    parentId: wrk_7583ea8f55a946498e00088e9344f270
+    modified: 1679810341181
+    created: 1679810341181
+    fileName: om30
+    contents: ""
+    contentType: yaml
+    _type: api_spec
