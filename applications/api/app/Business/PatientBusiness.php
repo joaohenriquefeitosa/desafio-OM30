@@ -2,6 +2,7 @@
 
 namespace App\Business;
 
+use App\Models\Address;
 use App\Models\Patient;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -49,6 +50,8 @@ class PatientBusiness
 
         try {
             $register = Patient::create($data);
+            $data['patient_id'] = $register->id;
+            Address::create($data);
             return response()->json(['status' => true, 'message' => 'Patient created with success.', 'data' => $register]);
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'message' => 'Error during create patient.'], status: Response::HTTP_NOT_FOUND);
