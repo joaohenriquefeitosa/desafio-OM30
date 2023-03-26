@@ -18,4 +18,14 @@ class Pacient extends Model
         'cpf',
         'cns',
     ];
+
+    public function scopeSearch($query, $search)
+    {
+        if (!empty($search)) {
+                $query->where('name', 'LIKE', "%$search%")
+                        ->orWhere('cpf', 'LIKE', "%$search%");
+        }
+
+        return $query;
+    }
 }
