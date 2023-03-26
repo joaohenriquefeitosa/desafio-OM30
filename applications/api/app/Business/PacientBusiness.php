@@ -64,7 +64,7 @@ class PacientBusiness
         }
     }
 
-    public function delete($id): JsonResponse
+    public function destroy($id): JsonResponse
     {
         $register = Pacient::find($id);
 
