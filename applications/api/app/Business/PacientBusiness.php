@@ -22,7 +22,7 @@ class PacientBusiness
 
             return response()->json(['status' => true, 'data' => $registers]);
         } catch (\Throwable $th) {
-            return response()->json(['status' => false, 'message' => 'Error during access matter.'], status: Response::HTTP_NOT_FOUND);
+            return response()->json(['status' => false, 'message' => 'Error during access pacient.'], status: Response::HTTP_NOT_FOUND);
         }
     }
 
