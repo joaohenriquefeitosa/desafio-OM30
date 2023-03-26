@@ -11,22 +11,22 @@ class PacientBusiness
         return response()->json();
     }
 
-    public function show()
+    public function show(): JsonResponse
     {
         return response()->json();
     }
 
-    public function store()
+    public function store(): JsonResponse
     {
         return response()->json();
     }
 
-    public function update()
+    public function update(): JsonResponse
     {
         return response()->json();
     }
 
-    public function delete()
+    public function delete(): JsonResponse
     {
         return response()->json();
     }
