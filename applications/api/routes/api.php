@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PacientController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('/patient', UserController::class);
+Route::resource('/patient', PacientController::class);
