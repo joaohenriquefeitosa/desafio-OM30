@@ -34,11 +34,11 @@ class UpdateFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'min:2', 'max:150'],
-            'birth_date' => ['required', 'string'],
-            'cpf' => ['required', 'numeric', 'digits:11', 'unique:patients,cpf'.$this->patient],
-            'cns' => ['required', 'numeric', 'digits:15', 'unique:patients,cns'.$this->patient],
-            'mother_name' => ['required', 'string', 'min:2', 'max:150'],
+            'name' => ['nullable', 'string', 'min:2', 'max:150'],
+            'birth_date' => ['nullable', 'string'],
+            'cpf' => ['nullable', 'numeric', 'digits:11', 'unique:patients,cpf'.$this->patient],
+            'cns' => ['nullable', 'numeric', 'digits:15', 'unique:patients,cns'.$this->patient],
+            'mother_name' => ['nullable', 'string', 'min:2', 'max:150'],
             'picture' => ['nullable'],
             'zipcode' => ['nullable', 'digits:8'],
             'address' => ['nullable', 'string', 'min:2', 'max:255'],
