@@ -49,7 +49,6 @@ class PatientBusiness
         }
 
         try {
-
             $patient = new Patient($data);
 
             if (isset($data['picture'])) {
@@ -128,50 +127,92 @@ class PatientBusiness
         }
     }
 
-    private function checkCNS($cns): bool
+    public function checkCNS($cns)
     {
+        $cns = preg_replace('/[^0-9]/', '', (string) $cns);
+
         if (strlen($cns) != 15) {
             return false;
         }
 
-        $soma = 0;
-        $multiplicador = 15;
-        for ($i = 0; $i < 11; $i++) {
-            $soma += (int) $cns[$i] * $multiplicador;
-            $multiplicador--;
-        }
+        $invalid = [
+            '000000000000000',
+            '111111111111111',
+            '222222222222222',
+            '333333333333333',
+            '444444444444444',
+            '555555555555555',
+            '666666666666666',
+            '777777777777777',
+            '888888888888888',
+            '999999999999999'
+        ];
 
-        $resto = $soma % 11;
-        $dv = 11 - $resto;
-        if ($dv == 11) {
-            $dv = 0;
-        }
-
-        if ($dv == 10) {
-            $soma = 0;
-            $multiplicador = 15;
-            for ($i = 0; $i < 11; $i++) {
-                $soma += (int) $cns[$i] * $multiplicador;
-                $multiplicador--;
-            }
-            $soma += 2;
-            $resto = $soma % 11;
-            $dv = 11 - $resto;
-            if ($dv == 11) {
-                $dv = 0;
-            }
-            if ($dv == 10) {
-                return false;
-            }
-        }
-
-        $dvCNS = (int) substr($cns, 11, 2);
-        if ($dvCNS != $dv) {
+        if (in_array($cns, $invalid)) {
             return false;
         }
 
-        return true;
+        $action = substr($cns, 0, 1);
+
+        switch ($action):
+            case '1':
+            case '2':
+                $ret = $this->validaCns($cns);
+                break;
+            case '7':
+                $ret = $this->validaCnsProvisorio($cns);
+                break;
+            case '8':
+                $ret = $this->validaCnsProvisorio($cns);
+                break;
+            case '9':
+                $ret = $this->validaCnsProvisorio($cns);
+                break;
+            default:
+                $ret = false;
+        endswitch;
+
+        return $ret;
     }
+
+    public function validaCns($cns)
+    {
+        $pis = substr($cns, 0, 11);
+        $value = 0;
+
+        for ($i = 0, $j = strlen($pis), $k = 15; $i < $j; $i++, $k--) :
+            $value += $pis[$i] * $k;
+        endfor;
+
+        $dv = 11 - fmod($value, 11);
+        $dv = ($dv != 11) ? $dv : '0';
+
+        if ($dv == 10) {
+            $value += 2;
+            $dv = 11 - fmod($value, 11);
+            $response = $pis . '001' . $dv;
+        } else {
+            $response = $pis . '000' . $dv;
+        }
+
+        if ($cns != $response) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function validaCnsProvisorio($cns)
+    {
+        $value = 0;
+
+        for ($i = 0, $j = strlen($cns), $k = $j; $i < $j; $i++, $k--) :
+            $value += $cns[$i] * $k;
+        endfor;
+
+        return $value % 11 == 0 && $j == 15;
+    }
+
 
     private function checkCPF($cpf): bool
     {
