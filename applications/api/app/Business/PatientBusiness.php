@@ -43,7 +43,6 @@ class PatientBusiness
             $register = Patient::create($data);
             return response()->json(['status' => true, 'message' => 'Patient created with success.', 'data' => $register]);
         } catch (\Throwable $th) {
-            var_dump($th);
             return response()->json(['status' => false, 'message' => 'Error during create patient.'], status: Response::HTTP_NOT_FOUND);
         }
     }

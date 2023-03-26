@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('cpf', 11);
             $table->string('cns', 15);
             $table->string('mother_name', 150);
-            $table->string('picture', 255);
+            $table->string('picture', 255)->nullable();
             $table->timestamps();
         });
     }
