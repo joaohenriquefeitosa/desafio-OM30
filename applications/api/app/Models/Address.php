@@ -10,7 +10,7 @@ class Address extends Model
     use HasFactory, HasUuids;
 
     protected $fillable = [
-        'pacient_id',
+        'patient_id',
         'zipcode',
         'address',
         'number',

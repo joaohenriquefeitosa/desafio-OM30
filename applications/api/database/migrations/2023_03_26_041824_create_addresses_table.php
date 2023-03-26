@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('city', 150);
             $table->string('state', 2);
 
-            $table->foreignUuid('pacient_id')->references('id')->on('pacients')->onDelete('cascade');
+            $table->foreignUuid('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->timestamps();
         });
     }

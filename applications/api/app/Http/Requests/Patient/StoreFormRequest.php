@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Pacient;
+namespace App\Http\Requests\Patient;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Elegant\Sanitizer\Laravel\SanitizesInput;
 
-class UpdateFormRequest extends FormRequest
+class StoreFormRequest extends FormRequest
 {
     use SanitizesInput;
 
@@ -36,8 +36,8 @@ class UpdateFormRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:2', 'max:150'],
             'birth_date' => ['required', 'string'],
-            'cpf' => ['required', 'numeric', 'digits:11', 'unique:patients,cpf'.$this->patient],
-            'cns' => ['required', 'numeric', 'digits:15', 'unique:patients,cns'.$this->patient],
+            'cpf' => ['required', 'numeric', 'digits:11', 'unique:patients,cpf'],
+            'cns' => ['required', 'numeric', 'digits:15', 'unique:patients,cns'],
             'mother_name' => ['required', 'string', 'min:2', 'max:150'],
             'picture' => ['nullable'],
             'zipcode' => ['nullable', 'digits:8'],
