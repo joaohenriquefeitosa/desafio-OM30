@@ -1,0 +1,50 @@
+version: "3"
+services:
+  #aplicação web (PHP+NGINX)
+  web:
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
+    networks:
+      - net_principal
+    volumes:
+      - ./applications:/var/www
+      - ./docker/nginx/sites:/etc/nginx/sites-available
+    ports:
+      - "80:80" #http
+      - "443:443" #https
+    depends_on:
+      - postgres
+      - redis
+      - mysql
+  # aplicação Postgres
+  postgres:
+    image: postgres:14.3-alpine
+    restart: always
+    networks:
+      - net_principal
+    volumes:
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./pg_hba.conf:/etc/postgresql/pg_hba.conf
+    environment:
+      POSTGRES_PASSWORD: senha_exemplar_postgres
+      POSTGRES_DB: db_postgres_exemplo
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+  # aplicação Redis
+  redis:
+    image: redis:7-alpine
+    restart: always
+    networks:
+      - net_principal
+    ports:
+      - "6379:6379"
+
+networks:
+  net_principal:
+
+volumes:
+  POSTGRES_VOLUME_EXEMPLO:
+  MYSQL_VOLUME_EXEMPLO:
+    driver: local
