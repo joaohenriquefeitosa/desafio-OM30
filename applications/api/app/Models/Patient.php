@@ -28,4 +28,9 @@ class Patient extends Model
 
         return $query;
     }
+
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
 }

@@ -49,10 +49,17 @@ class PatientBusiness
         }
 
         try {
-            $register = Patient::create($data);
-            $data['patient_id'] = $register->id;
-            Address::create($data);
-            return response()->json(['status' => true, 'message' => 'Patient created with success.', 'data' => $register]);
+
+            $patient = new Patient($data);
+            $patient->save();
+
+            $address = new Address($data);
+            $address->patient()->associate($patient);
+            $address->save();
+
+            $patient = $patient->refresh()->load('address');
+
+            return response()->json(['status' => true, 'message' => 'Patient created with success.', 'data' => $patient]);
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'message' => 'Error during create patient.'], status: Response::HTTP_NOT_FOUND);
         }
@@ -60,11 +67,11 @@ class PatientBusiness
 
     public function update($data, $id): JsonResponse
     {
-        if (!$this->checkCNS($data['cns'])) {
+        if (isset($data['cns']) && !$this->checkCNS($data['cns'])) {
             return response()->json(['status' => false, 'message' => 'CNS invalid.']);
         }
 
-        if (!$this->checkCPF($data['cpf'])) {
+        if (isset($data['cpf']) && !$this->checkCPF($data['cpf'])) {
             return response()->json(['status' => false, 'message' => 'CPF invalid.']);
         }
 
@@ -74,10 +81,18 @@ class PatientBusiness
         }
 
         try {
-            $register = Patient::find($position->id);
-            $register->update($data);
+            $patient = Patient::findOrFail($id);
+            $patient->update($data);
 
-            return response()->json(['status' => true, 'message' => 'Patient updated with success.']);
+            $address = $patient->address;
+            $address->fill($data);
+            $address->patient()->associate($patient);
+            $address->save();
+
+            // Retrieve the patient data with the associated address
+            $patient = $patient->refresh()->load('address');
+
+            return response()->json(['status' => true, 'message' => 'Patient updated with success.', 'data' => $patient]);
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'message' => 'Error during update patient.'], status: Response::HTTP_NOT_FOUND);
         }
