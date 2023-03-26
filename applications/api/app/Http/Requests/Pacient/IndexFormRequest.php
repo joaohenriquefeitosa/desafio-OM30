@@ -11,7 +11,7 @@ class IndexFormRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class IndexFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'length' => ['nullable'],
+            'sort_by' => ['nullable'],
+            'order_by' => ['nullable'],
+            'search' => ['nullable'],
         ];
     }
 }

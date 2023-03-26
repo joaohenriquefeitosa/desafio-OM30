@@ -7,5 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
+
+    protected $fillable = [
+        'pacient_id',
+        'zipcode',
+        'address',
+        'number',
+        'complement',
+        'neighborhood',
+        'city',
+        'state',
+    ];
 }
