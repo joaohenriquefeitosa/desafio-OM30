@@ -17,7 +17,8 @@ class PatientBusiness
         $search = isset($data['search']) ? $data['search'] : null;
 
         try {
-            $registers = Patient::search($search)
+            $registers = Patient::with('address')
+                ->search($search)
                 ->orderBy($sortBy, $orderBy)
                 ->paginate($length);
 
@@ -29,7 +30,7 @@ class PatientBusiness
 
     public function show($id): JsonResponse
     {
-        $user = Patient::find($id);
+        $user = Patient::with('address')->find($id);
 
         if (!$user) {
             return response()->json(['status' => false, 'message' => 'Patient not found.']);
