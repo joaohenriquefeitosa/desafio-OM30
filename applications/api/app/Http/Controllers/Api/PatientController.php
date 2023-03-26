@@ -6,6 +6,7 @@ use App\Business\PatientBusiness;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Patient\IndexFormRequest;
 use App\Http\Requests\Patient\StoreFormRequest;
+use App\Http\Requests\Patient\UpdateFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
