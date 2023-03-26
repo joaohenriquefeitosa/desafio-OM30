@@ -26,6 +26,11 @@ class PatientController extends Controller
      */
     public function store(StoreFormRequest $request, PatientBusiness $patientBusiness): JsonResponse
     {
+        if ($request->hasFile('picture') && $request->file('picture')->isValid()) {
+            $path = $request->file('picture')->store('patients', 'public');
+            $data['picture'] = $path;
+        }
+
         $data = $request->validated();
         return $patientBusiness->store($data);
     }
@@ -44,6 +49,12 @@ class PatientController extends Controller
      */
     public function update(UpdateFormRequest $request, PatientBusiness $patientBusiness, string $id): JsonResponse
     {
+        if ($request->hasFile('picture')) {
+            $picture = $request->file('picture');
+            $path = $picture->store('patient', 'public');
+            $data['picture'] = $path;
+        }
+
         $data = $request->validated();
         return $patientBusiness->update($data, $id);
     }

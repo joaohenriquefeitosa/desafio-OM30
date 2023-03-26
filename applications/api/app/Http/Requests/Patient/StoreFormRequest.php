@@ -46,7 +46,7 @@ class StoreFormRequest extends FormRequest
             'neighborhood' => ['required', 'string', 'min:2', 'max:150'],
             'city' => ['required', 'string', 'min:2', 'max:150'],
             'state' => ['required', 'string', 'min:2', 'max:2'],
-            'picture' => ['nullable'],
+            'picture' => ['nullable', 'image', 'max:2048'],
         ];
     }
 }

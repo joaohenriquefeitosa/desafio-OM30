@@ -17,4 +17,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('/patient', PatientController::class);
-Route::get('/zipcode', [AddressController::class, 'getAddressFromCep']);
+Route::get('/zipcode', [AddressController::class, 'getAddressFromZipcode'])->name('zipcode.get');

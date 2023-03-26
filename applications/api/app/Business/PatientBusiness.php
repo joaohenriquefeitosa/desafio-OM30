@@ -30,13 +30,12 @@ class PatientBusiness
 
     public function show($id): JsonResponse
     {
-        $user = Patient::with('address')->find($id);
-
-        if (!$user) {
-            return response()->json(['status' => false, 'message' => 'Patient not found.']);
+        $patient = Patient::with('address')->find($id);
+        if (!$patient) {
+            return response()->json(['status' => false, 'message' => 'Patient not found.'], status: Response::HTTP_NOT_FOUND);
         }
 
-        return response()->json(['status' => true, 'data' => $user]);
+        return response()->json(['status' => true, 'data' => $patient]);
     }
 
     public function store($data): JsonResponse
@@ -52,6 +51,15 @@ class PatientBusiness
         try {
 
             $patient = new Patient($data);
+
+            if (isset($data['picture'])) {
+                $uniqueId = uniqid();
+                $extension = $data['picture']->extension();
+                $filename = "{$uniqueId}.{$extension}";
+                $path = $data['picture']->storeAs('public/patients', $filename);
+                $patient->picture = $path;
+            }
+
             $patient->save();
 
             $address = new Address($data);
@@ -68,6 +76,11 @@ class PatientBusiness
 
     public function update($data, $id): JsonResponse
     {
+        $patient = Patient::find($id);
+        if (!$patient) {
+            return response()->json(['status' => false, 'message' => 'Patient not found.'], status: Response::HTTP_NOT_FOUND);
+        }
+
         if (isset($data['cns']) && !$this->checkCNS($data['cns'])) {
             return response()->json(['status' => false, 'message' => 'CNS invalid.']);
         }
@@ -76,13 +89,14 @@ class PatientBusiness
             return response()->json(['status' => false, 'message' => 'CPF invalid.']);
         }
 
-        $position = Patient::find($id);
-        if (!$position) {
-            return response()->json(['status' => false, 'message' => 'Patient not found.']);
-        }
+
 
         try {
-            $patient = Patient::findOrFail($id);
+            if (isset($data['picture'])) {
+                Storage::disk('public')->delete($patient->picture);
+                $patient->picture = $data['picture'];
+            }
+
             $patient->update($data);
 
             $address = $patient->address;
@@ -101,14 +115,13 @@ class PatientBusiness
 
     public function destroy($id): JsonResponse
     {
-        $register = Patient::find($id);
-
-        if (!$register) {
-            return response()->json(['status' => false, 'message' => 'Patient not found.']);
+        $patient = Patient::with('address')->find($id);
+        if (!$patient) {
+            return response()->json(['status' => false, 'message' => 'Patient not found.'], status: Response::HTTP_NOT_FOUND);
         }
 
         try {
-            $register->delete();
+            $patient->delete();
             return response()->json(['status' => true, 'message' => 'Patient removed.']);
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'message' => 'Error during remove patient.'], status: Response::HTTP_NOT_FOUND);
